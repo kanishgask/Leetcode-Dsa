@@ -1,0 +1,28 @@
+import java.util.*;
+
+class Solution {
+    public int[] findThePrefixCommonArray(int[] A, int[] B) {
+        int n = A.length;
+        int[] result = new int[n];
+        
+        // Track which numbers have appeared in A and B
+        boolean[] seenA = new boolean[n + 1];
+        boolean[] seenB = new boolean[n + 1];
+        
+        int commonCount = 0;
+        
+        for (int i = 0; i < n; i++) {
+            seenA[A[i]] = true;
+            seenB[B[i]] = true;
+            
+            // If the current number from A is also in B, increment
+            if (seenB[A[i]]) commonCount++;
+            // If the current number from B is also in A, increment
+            if (seenA[B[i]] && A[i] != B[i]) commonCount++;
+            
+            result[i] = commonCount;
+        }
+        
+        return result;
+    }
+}
